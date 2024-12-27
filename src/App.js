@@ -31,13 +31,7 @@ function App() {
     <div className="blog-container">
       {/* 문자열 외 다른 데이터 전달 할때는 {} 사용 */}
       <Header
-        title="Prop 넘기는 제목" // 문자열 prop 전달
-        subtitle="부제목" // 여러 개의 prop 전달 가능
-        showNav={true} // boolean prop 전달
-        count={5} // 숫자 prop 전달
-        user={{ name: "홍길동", role: "admin" }} // 객체 prop 전달
-        items={["메뉴1", "메뉴2", "메뉴3"]} // 배열 prop 전달
-        onClick={() => alert("클릭!")} // 함수 prop 전달
+        title="제목을 넘기자~~ 자식 컴포넌트로" // 문자열 prop 전달
       />
       {/* 메인 컨텐츠 영역 */}
       <main className="blog-content">

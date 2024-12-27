@@ -25,40 +25,14 @@ function Header(props) {
   // 1. props로 데이터를 전달 받음
   // 2. props.title이 없으면 "My Blog" 사용
   const blogTitle = props.title || "My Blog";
-  const blogSubtitle = props.subtitle || "부제목";
-  const showNav = props.showNav || false;
-  const count = props.count || 0;
-  const user = props.user || { name: "Unknown", role: "guest" };
-  const items = props.items || [];
-  const onClick = props.onClick;
 
   return (
     <header className="header">
       <div className="header-content">
         <div className="logo">
           {/* props로 받은 제목 사용 */}
-          <h1>{blogTitle}</h1>
-          <h2>{blogSubtitle}</h2>
+          <h1>{props.title}</h1>
         </div>
-        {showNav && (
-          <nav className="nav-menu">
-            <ul>
-              {items.map((item, index) => (
-                <li key={index}>
-                  <a href="/" onClick={onClick}>
-                    {item}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </nav>
-        )}
-        {user.role === "admin" && (
-          <div className="admin-controls">
-            <span>관리자: {user.name}</span>
-            <span>포스트 수: {count}</span>
-          </div>
-        )}
       </div>
     </header>
   );
