@@ -1,38 +1,64 @@
 /*
-  export , import 란?
-  
-  export : 컴포넌트를 다른 파일에서 사용할 수 있도록 내보내기
-  import : 다른 파일에서 내보낸 컴포넌트를 가져오기
+  props란?
+  - 컴포넌트에 전달하는 데이터
+  - 부모가 자식에게 데이터를 전달할 때 사용
+  - 자식은 받은 props를 수정할 수 없음 (읽기 전용)
 
-  쓰는이유 : 
-  1. 다른 파일이나 모듈 간에 코드를 공유하고 재사용하기 위해 사용
-  2. 큰 코드를 여러 작은 파일로 나누어 관리하기 위해 사용
+  쉬운 예시:
+  
+  1. 부모 컴포넌트:
+     <Profile name="홍길동" age={20} />
+  
+  2. 자식 컴포넌트:
+     function Profile(props) {
+       return (
+         <div>
+           이름: {props.name}
+           나이: {props.age}
+         </div>
+       )
+     }
 */
 
-// 컴포넌트는 대문자로 시작
-function Header() {
+// props를 사용한 간단한 예시
+function Header(props) {
+  // 1. props로 데이터를 전달 받음
+  // 2. props.title이 없으면 "My Blog" 사용
+  const blogTitle = props.title || "My Blog";
+  const blogSubtitle = props.subtitle || "부제목";
+  const showNav = props.showNav || false;
+  const count = props.count || 0;
+  const user = props.user || { name: "Unknown", role: "guest" };
+  const items = props.items || [];
+  const onClick = props.onClick;
+
   return (
     <header className="header">
       <div className="header-content">
         <div className="logo">
-          <h1>My Blog</h1>
+          {/* props로 받은 제목 사용 */}
+          <h1>{blogTitle}</h1>
+          <h2>{blogSubtitle}</h2>
         </div>
-        <nav className="nav-menu">
-          <ul>
-            <li>
-              <a href="#home">Home</a>
-            </li>
-            <li>
-              <a href="#about">About</a>
-            </li>
-            <li>
-              <a href="#blog">Blog</a>
-            </li>
-            <li>
-              <a href="#contact">Contact</a>
-            </li>
-          </ul>
-        </nav>
+        {showNav && (
+          <nav className="nav-menu">
+            <ul>
+              {items.map((item, index) => (
+                <li key={index}>
+                  <a href="/" onClick={onClick}>
+                    {item}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        )}
+        {user.role === "admin" && (
+          <div className="admin-controls">
+            <span>관리자: {user.name}</span>
+            <span>포스트 수: {count}</span>
+          </div>
+        )}
       </div>
     </header>
   );
