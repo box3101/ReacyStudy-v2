@@ -5,12 +5,9 @@ import Header from "./components/Header.jsx";
 
 // 컴포넌트는 대문자로
 function App() {
-  // useState 훅을 사용하여 상태 관리
-  // posts는 상태 변수, setPosts는 상태를 변경하는 함수
-  const [posts] = useState([
+  const posts = [
     {
       id: 1,
-
       title: "첫 번째 블로그 포스트",
       date: "2024-02-14",
       author: "Admin",
@@ -23,7 +20,10 @@ function App() {
       author: "Admin",
       content: "블로그의 두 번째 포스트입니다.",
     },
-  ]);
+  ];
+
+  // 조건부 랜더링
+  const isLoggedIN = true;
 
   // JSX를 사용한 UI 렌더링
   return (
@@ -35,19 +35,24 @@ function App() {
       />
       {/* 메인 컨텐츠 영역 */}
       <main className="blog-content">
-        {/* map을 사용한 배열 렌더링 */}
-        {/* 각 포스트마다 고유한 key 값 필요 */}
-        {posts.map((post) => (
-          <article key={post.id} className="blog-post">
-            <h2>{post.title}</h2>
-            {/* 중괄호를 사용하여 JavaScript 표현식 삽입 */}
-            <div className="post-meta">
-              <span>작성일: {post.date}</span>
-              <span>작성자: {post.author}</span>
-            </div>
-            <p>{post.content}</p>
-          </article>
-        ))}
+
+        {/* 조건부 랜더링 */}
+        {
+          isLoggedIN ? (
+            posts.map((post) => (
+              <article key={post.id} className="blog-post">
+                <h2>{post.title}</h2>
+                {/* 중괄호를 사용하여 JavaScript 표현식 삽입 */}
+                <div className="post-meta">
+                  <span>작성일: {post.date}</span>
+                  <span>작성자: {post.author}</span>
+                </div>
+                <p>{post.content}</p>
+              </article>
+            ))) :
+            <p>로그인이 필요합니다.</p>
+        }
+
       </main>
       {/* 푸터 컴포넌트 */}
       <footer className="blog-footer">
