@@ -1,66 +1,36 @@
-import { useState } from "react";
+/*
+ [ 상태관리 ]
+ React에서 state란?
+ 뜻 : 컴포넌트 내부에서 관리되는 변할 수 있는 데이터
+ 리액트에서는 useState 라는 리액트 훅으로 만듬
 
-// import 다른파일에서 쓰인 컴포넌트 가져오기
-import Header from "./components/Header.jsx";
+ useState 란?
+ 1. React의 가장 기본적인 Hook(훅 = React에서 제공하는 특별한 함수)
+ 2. 변할 수 있는 데이터를 저장
+ 3. [state, state변경함수] = useState(state에 담길 초기 값)
 
-// 컴포넌트는 대문자로
+ 리액트에서 일반 변수에 담으면 안되는 이유
+ -> 재렌더링 (화면 갱신) 때문
+*/
+
+import { useState } from "react"
 function App() {
-  const posts = [
-    {
-      id: 1,
-      title: "첫 번째 블로그 포스트",
-      date: "2024-02-14",
-      author: "Admin",
-      content: "환영합니다! 이것은 제 첫 번째 블로그 포스트입니다.",
-    },
-    {
-      id: 2,
-      title: "두 번째 블로그 포스트",
-      date: "2024-02-15",
-      author: "Admin",
-      content: "블로그의 두 번째 포스트입니다.",
-    },
-  ];
 
-  // 조건부 랜더링
-  const isLoggedIN = true;
+  // 1. 일반 변수
+  let number = 0;
 
-  // JSX를 사용한 UI 렌더링
+  // 2. state 변수
+  const [count, setCount] = useState(0);
+
   return (
-    // className으로 CSS 클래스 적용
-    <div className="blog-container">
-      {/* 문자열 외 다른 데이터 전달 할때는 {} 사용 */}
-      <Header
-        title="제목을 넘기자~~ 자식 컴포넌트로" // 문자열 prop 전달
-      />
-      {/* 메인 컨텐츠 영역 */}
-      <main className="blog-content">
+    <div>
+      <h1>일반변수: {number}</h1>  {/* 값이 변해도 화면 갱신 안됨 */}
+      <button onClick={() => number = number + 1}>증가</button>
 
-        {/* 조건부 랜더링 */}
-        {
-          isLoggedIN ? (
-            posts.map((post) => (
-              <article key={post.id} className="blog-post">
-                <h2>{post.title}</h2>
-                {/* 중괄호를 사용하여 JavaScript 표현식 삽입 */}
-                <div className="post-meta">
-                  <span>작성일: {post.date}</span>
-                  <span>작성자: {post.author}</span>
-                </div>
-                <p>{post.content}</p>
-              </article>
-            ))) :
-            <p>로그인이 필요합니다.</p>
-        }
-
-      </main>
-      {/* 푸터 컴포넌트 */}
-      <footer className="blog-footer">
-        <p>&copy; 2024 My Blog. All rights reserved.</p>
-      </footer>
+      <h1>state변수: {count}</h1>   {/* 값이 변하면 화면 자동 갱신 */}
+      <button onClick={() => setCount(count + 1)}>증가</button>
     </div>
-  );
+  )
 }
 
-// 다른 파일에서 import 할 수 있도록 내보내기
-export default App;
+export default App
