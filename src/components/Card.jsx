@@ -8,11 +8,6 @@ function Card() {
   ];
   const [posts, setPosts] = useState(postData);
 
-  // 이벤트 함수 정의
-  const handleClick = () => {
-    console.log("버튼이 클릭되었습니다.");
-  }
-
   return (
     <>
       {posts.map((post) => (
@@ -25,8 +20,10 @@ function Card() {
         </article>
       ))}
 
-      {/*자바스크립트 표현식을 사용할 때 중괄호 {}를 사용*/}
-      <button onClick={handleClick}>클릭하세요</button>
+      {/* 인라인 화살표 함수로 처리 */}
+      <button onClick={()=>{
+        console.log('버튼이 클릭 되었습니다.');
+      }}>클릭하세요</button>
     </>
   )
 }
