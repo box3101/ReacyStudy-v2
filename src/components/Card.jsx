@@ -1,9 +1,13 @@
+import { useState } from "react";
+
 function Card(props) {
-  const posts = [
+  const postData = [
     { id: 1, title: "첫 번째 포스트", content: "내용 1" },
     { id: 2, title: "두 번째 포스트", content: "내용 2" },
     { id: 3, title: "두 번째 포스트", content: "내용 3" },
   ];
+
+  const [posts, setPosts] = useState(postData)
 
   return (
     <>
