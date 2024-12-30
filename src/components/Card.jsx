@@ -8,6 +8,11 @@ function Card() {
   ];
   const [posts, setPosts] = useState(postData);
 
+  // 3. 매개변수가 있는 이벤트 함수 정의
+  const handleClick = (id) => {
+    console.log(`${id}버튼이 클릭되었습니다.`);
+  }
+
   return (
     <>
       {posts.map((post) => (
@@ -20,10 +25,8 @@ function Card() {
         </article>
       ))}
 
-      {/* 인라인 화살표 함수로 처리 */}
-      <button onClick={()=>{
-        console.log('버튼이 클릭 되었습니다.');
-      }}>클릭하세요</button>
+      {/* 매개 변수가 있는 함수는 () => {} 화살표 함수를 사용 */}
+      <button onClick={()=>{handleClick(1)}}>클릭하세요</button>
     </>
   )
 }
