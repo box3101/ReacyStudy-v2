@@ -1,13 +1,17 @@
 import { useState } from "react";
 
-function Card(props) {
+function Card() {
   const postData = [
     { id: 1, title: "첫 번째 포스트", content: "내용 1" },
     { id: 2, title: "두 번째 포스트", content: "내용 2" },
     { id: 3, title: "두 번째 포스트", content: "내용 3" },
   ];
+  const [posts, setPosts] = useState(postData);
 
-  const [posts, setPosts] = useState(postData)
+  // 이벤트 함수 정의
+  const handleClick = () => {
+    console.log("버튼이 클릭되었습니다.");
+  }
 
   return (
     <>
@@ -20,6 +24,9 @@ function Card(props) {
           <button>수정</button>
         </article>
       ))}
+
+      {/*자바스크립트 표현식을 사용할 때 중괄호 {}를 사용*/}
+      <button onClick={handleClick}>클릭하세요</button>
     </>
   )
 }
