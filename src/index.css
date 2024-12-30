@@ -1,13 +1,98 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+/* 전체 컨테이너 스타일 */
+.blog-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+/* 헤더 스타일 */
+.blog-header {
+  text-align: center;
+  padding: 20px 0;
+  margin-bottom: 30px;
+  border-bottom: 2px solid #eee;
+}
+
+.blog-header h1 {
+  color: #333;
+  font-size: 2.5rem;
+  margin: 0;
+}
+
+/* 메인 컨텐츠 영역 스타일 */
+.blog-content {
+  margin: 20px 0;
+}
+
+/* 개별 포스트 스타일 */
+.blog-post {
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.blog-post h2 {
+  color: #444;
+  margin-top: 0;
+  margin-bottom: 15px;
+  font-size: 1.8rem;
+}
+
+.blog-post p {
+  color: #666;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* 버튼 스타일 */
+button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+/* 푸터 스타일 */
+.blog-footer {
+  margin-top: 40px;
+  padding-top: 20px;
+  border-top: 1px solid #eee;
+  text-align: center;
+  color: #666;
+  font-size: 0.9rem;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+  .blog-container {
+    padding: 10px;
+  }
+
+  .blog-header h1 {
+    font-size: 2rem;
+  }
+
+  .blog-post {
+    padding: 15px;
+  }
+
+  .blog-post h2 {
+    font-size: 1.5rem;
+  }
+}
+.blog-post{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
