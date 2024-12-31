@@ -96,3 +96,17 @@ button:hover {
   align-items: center;
   justify-content: space-between;
 }
+.input-wrp{
+  display: flex;
+  gap:5px;
+  .btn-wrp{
+    display: flex;gap: 5px;
+  }
+}
+.right{
+  display: flex;
+  gap:5px;
+}
+.cancle{
+  background: red;
+}

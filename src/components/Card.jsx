@@ -12,16 +12,24 @@ function Card() {
   const [inputValue, setInputValue] = useState('');
 
   // input 값을 얻는 함수
-  const handleInput = (e) =>{
+  const handleInput = (e) => {
     setInputValue(e.target.value);
   }
 
+  // 취소 버튼을 눌렀을때 다시 수정 버튼 보이게 하는 함수
+  const handleCancle = () =>{
+    const updatePostStates = posts.map((item)=>{
+      return {...item , state : false}
+    })
+    setPosts(updatePostStates);
+  }
+
   // content 값을 input 값으로 바꾸는 함수
-  const handleChangeCnt = (id) =>{
-    const updatePostCnt = posts.map((item)=>{
-      if(id === item.id){
-        return {...item , content : inputValue , state : false}
-      }else{
+  const handleChangeCnt = (id) => {
+    const updatePostCnt = posts.map((item) => {
+      if (id === item.id) {
+        return { ...item, content: inputValue, state: false }
+      } else {
         return item
       }
     })
@@ -30,13 +38,13 @@ function Card() {
 
   // 수정 클릭 시 게시물 제목 수정할 수 있는 함수
   const handleEdit = (id) => {
-    posts.forEach((item)=>{
-      item.state = false    
+    posts.forEach((item) => {
+      item.state = false
     })
     const updatePosts = posts.map((post) => {
       if (post.id === id) {
         return { ...post, state: true }
-      }else{
+      } else {
         return post
       }
     })
@@ -55,7 +63,10 @@ function Card() {
             post.state ?
               <div className="input-wrp">
                 <input placeholder="값을 입려해주세요" onChange={handleInput} type="text" />
-                <button onClick={()=>{handleChangeCnt(post.id)}}>저장</button>
+                <div className="btn-wrp">
+                  <button onClick={() => { handleChangeCnt(post.id) }}>저장</button>
+                  <button onClick={()=>{handleCancle()}} className="cancle">취소</button>
+                </div>
               </div>
               :
               <div className="right">
