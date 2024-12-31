@@ -17,9 +17,9 @@ function Card() {
   }
 
   // 취소 버튼을 눌렀을때 다시 수정 버튼 보이게 하는 함수
-  const handleCancle = () =>{
-    const updatePostStates = posts.map((item)=>{
-      return {...item , state : false}
+  const handleCancle = () => {
+    const updatePostStates = posts.map((item) => {
+      return { ...item, state: false }
     })
     setPosts(updatePostStates);
   }
@@ -52,12 +52,25 @@ function Card() {
   }
 
   // 삭제 클릭 시 내가 누른 게시물 삭제
-  const handleDelete = (id) =>{
-    const updatePosts = posts.filter((item)=>{
+  const handleDelete = (id) => {
+    const updatePosts = posts.filter((item) => {
       return id !== item.id
     })
     setPosts(updatePosts)
   }
+
+  // 게시물 추가 클릭 시 내가원하는 게시물 추가
+  const handleAddPost = () => {
+    const newPost = {
+      id : 4,
+      title: "네 번째 포스트", 
+      content: "내용 4", 
+      state: false
+    }
+    const updatePosts = posts
+    setPosts([...posts , newPost])
+  }
+
 
   return (
     <>
@@ -73,7 +86,7 @@ function Card() {
                 <input placeholder="값을 입려해주세요" onChange={handleInput} type="text" />
                 <div className="btn-wrp">
                   <button onClick={() => { handleChangeCnt(post.id) }}>저장</button>
-                  <button onClick={()=>{handleCancle()}} className="cancle">취소</button>
+                  <button onClick={() => { handleCancle() }} className="cancle">취소</button>
                 </div>
               </div>
               :
@@ -84,6 +97,9 @@ function Card() {
           }
         </article>
       ))}
+      <div className="bottom tac">
+        <button onClick={() => handleAddPost()}>게시물 추가</button>
+      </div>
     </>
   );
 }
