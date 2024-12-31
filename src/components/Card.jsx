@@ -8,6 +8,26 @@ function Card() {
   ];
   const [posts, setPosts] = useState(postData);
 
+  // input을 저장할 변수
+  const [inputValue, setInputValue] = useState('');
+
+  // input 값을 얻는 함수
+  const handleInput = (e) =>{
+    setInputValue(e.target.value);
+  }
+
+  // content 값을 input 값으로 바꾸는 함수
+  const handleChangeCnt = (id) =>{
+    const updatePostCnt = posts.map((item)=>{
+      if(id === item.id){
+        return {...item , content : inputValue , state : false}
+      }else{
+        return item
+      }
+    })
+    setPosts(updatePostCnt)
+  }
+
   // 수정 클릭 시 게시물 제목 수정할 수 있는 함수
   const handleEdit = (id) => {
     posts.forEach((item)=>{
@@ -34,8 +54,8 @@ function Card() {
           {
             post.state ?
               <div className="input-wrp">
-                <input type="text" />
-                <button>저장</button>
+                <input placeholder="값을 입려해주세요" onChange={handleInput} type="text" />
+                <button onClick={()=>{handleChangeCnt(post.id)}}>저장</button>
               </div>
               :
               <div className="right">
@@ -49,9 +69,8 @@ function Card() {
 }
 
 /*
- 1. 수정 클릭 시 게시물 제목 수정할 수 있는 input 창 띄우기
- 1-1. 수정 클릭 시 클릭한 컨텐츠만 수정될 수 있게끔 변경
- 2. 수정 완료 시 게시물 제목 수정
+ 1. 인풋의 값을 입력하면 그 값을 저장
+ 2. 저장된 인풋의 값을 이제 content로 집어 넣기.
 */
 
 // 다른 파일에서 Card 컴포넌트를 import 할 수 있도록 내보내기
