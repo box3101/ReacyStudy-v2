@@ -4,7 +4,7 @@ function Card() {
   const postData = [
     { id: 1, title: "첫 번째 포스트", content: "내용 1", state: false },
     { id: 2, title: "두 번째 포스트", content: "내용 2", state: false },
-    { id: 3, title: "두 번째 포스트", content: "내용 3", state: false },
+    { id: 3, title: "세 번째 포스트", content: "내용 3", state: false },
   ];
   const [posts, setPosts] = useState(postData);
 
@@ -41,12 +41,20 @@ function Card() {
     posts.forEach((item) => {
       item.state = false
     })
-    const updatePosts = posts.map((post) => {
-      if (post.id === id) {
-        return { ...post, state: true }
+    const updatePosts = posts.map((item) => {
+      if (item.id === id) {
+        return { ...item, state: true }
       } else {
-        return post
+        return item
       }
+    })
+    setPosts(updatePosts)
+  }
+
+  // 삭제 클릭 시 내가 누른 게시물 삭제
+  const handleDelete = (id) =>{
+    const updatePosts = posts.filter((item)=>{
+      return id !== item.id
     })
     setPosts(updatePosts)
   }
@@ -71,6 +79,7 @@ function Card() {
               :
               <div className="right">
                 <button onClick={() => handleEdit(post.id)}>수정</button>
+                <button onClick={() => handleDelete(post.id)} className="cancle">삭제</button>
               </div>
           }
         </article>
