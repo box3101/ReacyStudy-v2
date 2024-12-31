@@ -8,17 +8,20 @@ function Card() {
   ];
   const [posts, setPosts] = useState(postData);
 
-  // 3. 매개변수가 있는 이벤트 함수 정의
+  // 수정 클릭 시 게시물 제목 수정할 수 있는 함수
   const handleEdit = (id) => {
-    const updatePost = posts.map((post) => {
+    posts.forEach((item)=>{
+      item.state = false    
+    })
+    const updatePosts = posts.map((post) => {
       if (post.id === id) {
-        return { ...post, state: true };
-      } else {
-        return post;
+        return { ...post, state: true }
+      }else{
+        return post
       }
-    });
-    setPosts(updatePost);
-  };
+    })
+    setPosts(updatePosts)
+  }
 
   return (
     <>
@@ -28,17 +31,17 @@ function Card() {
             <h2>{post.title}</h2>
             <p>{post.content}</p>
           </div>
-          {post.state ? (
-            <input type="text" />
-          ) : (
-            <button
-              onClick={() => {
-                handleEdit(post.id);
-              }}
-            >
-              수정
-            </button>
-          )}
+          {
+            post.state ?
+              <div className="input-wrp">
+                <input type="text" />
+                <button>저장</button>
+              </div>
+              :
+              <div className="right">
+                <button onClick={() => handleEdit(post.id)}>수정</button>
+              </div>
+          }
         </article>
       ))}
     </>
