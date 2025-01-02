@@ -9,27 +9,30 @@ function Card() {
   const [posts, setPosts] = useState(postData);
 
   // 게시물 추가 제목, 내용을 저장할 변수
-  const [titleValue, setTitleValue] = useState("");
-  const [cntValue, setCntValue] = useState("");
+  const [addPost, setAddPost] = useState({
+    title: "",
+    content: "",
+  });
 
-  const handleTitle = (e) => {
-    setTitleValue(e.target.value);
-  };
+  const handleNewPostChange = (e) => {
+    const { name, value } = e.target;
 
-  const handleCnt = (e) => {
-    setCntValue(e.target.value);
+    setAddPost((prev) => {
+      return { ...prev, [name]: value };
+    });
   };
 
   // 게시물 수정 시 제목 , 내용을 저장할 변수
-  const [inputValue, setInputValue] = useState("");
-  const [inputCnt, setInputCnt] = useState("");
+  const [changePost, setChangePost] = useState({
+    title: "",
+    content: "",
+  });
+  const handleEditPostChange = (e) => {
+    const { name, value } = e.target;
 
-  const handleInput = (e) => {
-    setInputValue(e.target.value);
-  };
-
-  const handleInputCnt = (e) => {
-    setInputCnt(e.target.value);
+    setChangePost((prev) => {
+      return { ...prev, [name]: value };
+    });
   };
 
   // 취소 버튼을 눌렀을때 다시 수정 버튼 보이게 하는 함수
@@ -59,7 +62,12 @@ function Card() {
   const handleChangeCnt = (id) => {
     const updatePostCnt = posts.map((item) => {
       if (id === item.id) {
-        return { ...item, title: inputValue, content: inputCnt, state: false };
+        return {
+          ...item,
+          title: changePost.title,
+          content: changePost.content,
+          state: false,
+        };
       } else {
         return item;
       }
@@ -79,8 +87,8 @@ function Card() {
   const handleAddPost = () => {
     const newPost = {
       id: Date.now(),
-      title: titleValue,
-      content: cntValue,
+      title: addPost.title,
+      content: addPost.content,
       state: false,
     };
     setPosts([...posts, newPost]);
@@ -97,12 +105,14 @@ function Card() {
           {post.state ? (
             <div className="input-wrp">
               <input
+                name="title"
                 placeholder="값을 입려해주세요"
-                onChange={handleInput}
+                onChange={handleEditPostChange}
                 type="text"
               />
               <textarea
-                onChange={handleInputCnt}
+                name="content"
+                onChange={handleEditPostChange}
                 placeholder="내용을 입력해주세요"
               ></textarea>
               <div className="btn-wrp">
@@ -135,15 +145,15 @@ function Card() {
       ))}
       <div className="bottom tac">
         <input
+          name="title"
           type="text"
           placeholder="타이틀을 입력하세요"
-          onChange={handleTitle}
+          onChange={handleNewPostChange}
         />
         <textarea
-          name=""
-          id=""
+          name="content"
           placeholder="내용을 입력하세요."
-          onChange={handleCnt}
+          onChange={handleNewPostChange}
         ></textarea>
         <button onClick={() => handleAddPost()}>게시물 추가</button>
       </div>
